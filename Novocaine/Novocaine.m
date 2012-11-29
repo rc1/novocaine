@@ -237,6 +237,11 @@ static Novocaine *audioManager = nil;
     CheckError( AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, sizeof(preferredBufferSize), &preferredBufferSize), "Couldn't set the preferred buffer duration");
 #endif
     
+    // Set the session mode
+    UInt32 sessionMode = kAudioSessionMode_Measurement;
+    CheckError( AudioSessionSetProperty (kAudioSessionProperty_Mode,
+                                         sizeof (sessionMode),
+                                         &sessionMode), "Could not set audo session mode to measurement");
     
     // Set the audio session active
     CheckError( AudioSessionSetActive(YES), "Couldn't activate the audio session");
